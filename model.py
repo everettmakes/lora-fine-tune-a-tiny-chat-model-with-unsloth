@@ -68,8 +68,31 @@ def count_trainable_parameters(model):
 def trainable_fraction(trainable_count, total_count):
     return trainable_count / total_count
 
-# Step 9 - build_instruction_examples (not yet solved)
-# TODO: implement
+# Step 9 - build_instruction_examples
+def build_instruction_examples():
+    """Return a tiny hand-written instruction/response dataset for SFT."""
+    return [
+        {
+            "instruction": "What is the capital of France?",
+            "response": "The capital of France is Paris.",
+        },
+        {
+            "instruction": "Translate 'good morning' into Spanish.",
+            "response": "'Good morning' in Spanish is 'buenos días'.",
+        },
+        {
+            "instruction": "Write a Python function that returns the square of a number.",
+            "response": "def square(x):\n    return x * x",
+        },
+        {
+            "instruction": "Summarise in one sentence: LoRA trains small low-rank matrices instead of the full model weights.",
+            "response": "LoRA fine-tunes a model cheaply by learning small add-on matrices while the original weights stay frozen.",
+        },
+        {
+            "instruction": "Give me one tip for staying focused while studying.",
+            "response": "Work in 25-minute blocks with your phone in another room, then take a 5-minute break.",
+        },
+    ]
 
 # Step 10 - format_instruction_example (not yet solved)
 # TODO: implement
