@@ -156,10 +156,12 @@ def build_sft_trainer(model, tokenizer, dataset, training_args, max_seq_length=2
 # Step 17 - run_sft_training
 def run_sft_training(trainer):
     """Run a few SFT steps and return the final training loss as a float."""
-    return trainer.train()['training_loss']
+    return float(trainer.train().training_loss)
 
-# Step 18 - switch_to_inference_mode (not yet solved)
-# TODO: implement
+# Step 18 - switch_to_inference_mode
+def switch_to_inference_mode(model):
+    """Switch the LoRA-tuned model into Unsloth's fast inference mode and return it."""
+    return FastLanguageModel.for_inference(model)
 
 # Step 19 - build_chat_prompt (not yet solved)
 # TODO: implement
