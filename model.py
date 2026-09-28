@@ -163,9 +163,29 @@ def switch_to_inference_mode(model):
     """Switch the LoRA-tuned model into Unsloth's fast inference mode and return it."""
     return FastLanguageModel.for_inference(model)
 
-# Step 19 - build_chat_prompt (not yet solved)
-# TODO: implement
+# Step 19 - build_chat_prompt
+def build_chat_prompt(tokenizer, instruction):
+    """Return a chat-template prompt string ready for assistant generation."""
+    messages = [{"role": "user", "content": instruction}]
+    return tokenizer.apply_chat_template(
+        messages,
+        tokenize=False,
+        add_generation_prompt=True,
+    )
 
-# Step 20 - generate_reply (not yet solved)
-# TODO: implement
+# Step 20 - generate_reply
+def generate_reply(model, tokenizer, prompt, max_new_tokens=32):
+    """Greedy-generate a reply for `prompt` and return the decoded text."""
+    inputs = tokenizer(prompt, return_tensors="pt").to(model.device)
+    with torch.no_grad():
+        output_ids = model.generate(
+            **inputs,
+            max_new_tokens=max_new_tokens,
+            do_sample=False,
+            pad_token_id=tokenizer.pad_token_id,
+        )
+
+    prompt_len = inputs["input_ids"].shape[1]
+    new_ids = output_ids[0, prompt_len:]
+    return tokenizer.decode(new_ids, skip_special_tokens=True)
 
