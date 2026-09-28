@@ -130,7 +130,8 @@ def build_training_arguments(output_dir='./sft_out', max_steps=5, learning_rate=
         'learning_rate': learning_rate,
         'output_dir': output_dir,
         'logging_steps': 1,
-        'optim': 'adamw_8bit'
+        'optim': 'adamw_8bit',
+        'save_strategy': 'no',
     }
     if torch.cuda.is_bf16_supported():
         params['bf16'] = True
@@ -152,8 +153,10 @@ def build_sft_trainer(model, tokenizer, dataset, training_args, max_seq_length=2
         packing = False
     )
 
-# Step 17 - run_sft_training (not yet solved)
-# TODO: implement
+# Step 17 - run_sft_training
+def run_sft_training(trainer):
+    """Run a few SFT steps and return the final training loss as a float."""
+    return trainer.train()['training_loss']
 
 # Step 18 - switch_to_inference_mode (not yet solved)
 # TODO: implement
