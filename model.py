@@ -109,11 +109,16 @@ def build_text_dataset(texts):
     """Wrap a list of training strings in a HF Dataset with a 'text' column."""
     return Dataset.from_dict({"text": texts})
 
-# Step 13 - tokenize_text (not yet solved)
-# TODO: implement
+# Step 13 - tokenize_text
+def tokenize_text(tokenizer, text):
+    """Tokenize a single string and return a list[int] of input ids."""
+    return list(tokenizer(text).input_ids)
 
-# Step 14 - count_tokens (not yet solved)
-# TODO: implement
+# Step 14 - count_tokens
+def count_tokens(input_ids):
+    """Return the number of tokens in a tokenized example."""
+    # TODO: return the length of the input_ids sequence
+    return len(input_ids)
 
 # Step 15 - build_training_arguments (not yet solved)
 # TODO: implement
