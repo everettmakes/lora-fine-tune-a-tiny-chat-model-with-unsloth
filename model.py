@@ -142,7 +142,6 @@ def build_training_arguments(output_dir='./sft_out', max_steps=5, learning_rate=
 from trl import SFTTrainer
 def build_sft_trainer(model, tokenizer, dataset, training_args, max_seq_length=256):
     """Construct a trl SFTTrainer over dataset['text'] ready to .train()."""
-    # TODO: wire model, tokenizer, dataset, and training_args into an SFTTrainer
     return SFTTrainer(
         model=model,
         train_dataset=dataset,
